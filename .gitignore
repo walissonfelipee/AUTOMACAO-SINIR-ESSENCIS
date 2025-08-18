@@ -2,13 +2,15 @@
 .venv/
 venv/
 
-# Ignorar configurações do PyCharm
+# Ignorar configuração IDE
 .idea/
 
 # Ignorar caches e temporários
 __pycache__/
 *.pyc
 
+# Ignorar variáveis de ambiente
 .env
 
-sinir
+# Ignorar planilha
+sinir.xlsx
