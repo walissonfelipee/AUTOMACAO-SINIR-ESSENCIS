@@ -66,7 +66,7 @@ navegador.find_element(By.XPATH,
 sleep(1.5)
 # FAZ A LEITURA DA PLANILHA.
 try:
-    DataFrame = pd.read_excel('sinir.xlsx', sheet_name='Planilha1')
+    DataFrame = pd.read_excel('teste.xlsx', sheet_name='Planilha1')
 except Exception as e:
     mensagem_erro = f"Não encontrei a Planilha! ai fica dificíl. {e}"
     logging.error(mensagem_erro)
@@ -84,7 +84,7 @@ clientes_separados['E1'] = 'DATA S'
 clientes_separados['F1'] = 'MOTIVO'
 
 # CRIANDO A INTERFACE PARA ACOMPANHAR A PLANILHA
-df = pd.read_excel("sinir.xlsx")
+df = pd.read_excel("teste.xlsx")
 
 # Criando a interface
 root = tk.Tk()
@@ -171,7 +171,6 @@ def aguardar_carregamento(navegador, mtr_atual, tempo_max=30):
         )
 
     except:
-
         navegador.refresh()
         time.sleep(5)
         try:
@@ -366,135 +365,90 @@ def processar_planilha():
                                     # LIMPA O CAMPO MOTORISTA E COLA O NOME DO MOTORISTA
 
                                     navegador.find_element(By.XPATH, '//input[@id="mat-input-4"]').clear()
-                                    sleep(1)
+                                    sleep(0.3)
 
                                     navegador.find_element(By.XPATH, '//input[@id="mat-input-4"]').send_keys(str(motorista))
-                                    sleep(1)
+                                    sleep(0.3)
 
                                     # LIMPA O CAMPO DA E PREENCHE A PLACA
 
                                     navegador.find_element(By.XPATH, '//input[@id="mat-input-5"]').clear()
-                                    sleep(1)
+                                    sleep(0.3)
 
                                     campo_placa = navegador.find_element(By.XPATH, '//input[@id="mat-input-5"]')
-                                    sleep(1)
+                                    sleep(0.3)
                                     campo_placa.send_keys(placa)
-                                    sleep(1)
+                                    sleep(0.3)
                                     campo_placa.send_keys(Keys.TAB)
 
-                                    sleep(1)
+                                    sleep(0.3)
 
                                     # LIMPA O CAMPO DA E PREENCHE DATA
 
                                     navegador.find_element(By.XPATH, '//input[@id="mat-input-6"]').send_keys(data)
-                                    sleep(1)
+                                    sleep(0.3)
 
                                     # SELECIONAR RESPONSÁVEL
 
                                     navegador.find_element(By.XPATH, '//div[@class="col-g-4"]').click()
-                                    sleep(1)
+                                    sleep(0.3)
 
                                     # CLICAR NO CHECK DO RESPONSÁVEL
 
                                     navegador.find_element(By.XPATH, '//a[@title="Selecionar"]').click()
-                                    sleep(1)
-
-                                    # ESCOLHER O TRATAMENTO
-                                    actions = ActionChains(navegador)
+                                    sleep(0.3)
 
                                     try:
 
-                                        if tratamento == '2402-COMPOSTAGEM DE RES PRIVADOS':  # COMPOSTAGEM
-                                            navegador.find_element(By.XPATH, '//div[@class="mat-select-arrow"]').click()
-                                            sleep(1)
-                                            pyautogui.press('up', presses=36)
-                                            sleep(1)
-                                            pyautogui.press('down', presses=11)
-                                            sleep(1)
-                                            actions.send_keys(Keys.ENTER).perform()
-                                            sleep(1)
+                                        #MAPA DE TRATAMENTOS
 
-                                        elif tratamento == '2303-AT CLASSE II - RES PRIVADOS':  # Aterro Residuos Classes IIA e IIB
-
-                                            navegador.find_element(By.XPATH, '//div[@class="mat-select-arrow"]').click()
-                                            sleep(1)
-                                            pyautogui.press('up', presses=36)
-                                            sleep(1)
-                                            pyautogui.press('down', presses=2)
-                                            sleep(1)
-                                            actions.send_keys(Keys.ENTER).perform()
-                                            sleep(1)
-                                        elif tratamento == 'AT CLASSE II - RES PRIVADOS':  # Aterro Residuos Classes IIA e IIB
-
-                                            navegador.find_element(By.XPATH, '//div[@class="mat-select-arrow"]').click()
-                                            sleep(1)
-                                            pyautogui.press('up', presses=36)
-                                            sleep(1)
-                                            pyautogui.press('down', presses=2)
-                                            sleep(1)
-                                            actions.send_keys(Keys.ENTER).perform()
-                                            sleep(1)
-
-                                        elif tratamento == 'Manufatura Reversa':  # OUTROS
-
-                                            navegador.find_element(By.XPATH, '//div[@class="mat-select-arrow"]').click()
-                                            sleep(1)
-                                            pyautogui.press('up', presses=36)
-
-                                            sleep(1)
-                                            pyautogui.press('down', presses=23)
-                                            sleep(1)
-                                            actions.send_keys(Keys.ENTER).perform()
-                                            sleep(1)
-
-                                        elif tratamento == '2401-COPROCESSAMENTO RES PRIVADOS':  # BLENDAGEM PARA COPROCESSAMENTO
-
-                                            navegador.find_element(By.XPATH, '//div[@class="mat-select-arrow"]').click()
-                                            sleep(1)
-                                            pyautogui.press('up', presses=36)
-                                            sleep(1)
-                                            pyautogui.press('down', presses=9)
-                                            sleep(1)
-                                            actions.send_keys(Keys.ENTER).perform()
-                                            sleep(1)
-                                        elif tratamento == 'COPROCESSAMENTO RES PRIVADOS':  # BLENDAGEM PARA COPROCESSAMENTO
-
-                                            navegador.find_element(By.XPATH, '//div[@class="mat-select-arrow"]').click()
-                                            sleep(1)
-                                            pyautogui.press('up', presses=36)
-                                            sleep(1)
-                                            pyautogui.press('down', presses=9)
-                                            sleep(1)
-                                            actions.send_keys(Keys.ENTER).perform()
-                                            sleep(1)
-
-                                        elif tratamento == 'TRANSP EFLUENTES PRIVADOS':  # TRATAMENTO DE EFLUENTE
-
-                                            navegador.find_element(By.XPATH, '//div[@class="mat-select-arrow"]').click()
-                                            sleep(1)
-                                            pyautogui.press('up', presses=36)
-                                            sleep(1)
-                                            pyautogui.press('down', presses=29)
-                                            sleep(1)
-                                            actions.send_keys(Keys.ENTER).perform()
-                                            sleep(1)
-
-                                        elif tratamento == '2302-AT CLASSE I - RES PRIVADOS':  # Aterro Resíduos Classe I
-
-                                            navegador.find_element(By.XPATH, '//div[@class="mat-select-arrow"]').click()
-                                            sleep(1)
-                                            pyautogui.press('up', presses=36)
-                                            sleep(1)
-                                            pyautogui.press('down', presses=1)
-
-                                            sleep(1)
-                                            actions.send_keys(Keys.ENTER).perform()
-                                            sleep(1)
-
-                                        elif tratamento == '2406 - SERVICOS DE LOGISTICA REVERSA':  # LÂMPADAS
-
+                                        mapa_tratamentos = { '2402-COMPOSTAGEM DE RES PRIVADOS': 'Compostagem',
+                                                             '2303-AT CLASSE II - RES PRIVADOS': 'Aterro Resíduos Classes IIA e IIB',
+                                                             'AT CLASSE II - RES PRIVADOS': 'Aterro Resíduos Classes IIA e IIB',
+                                                             'Manufatura Reversa': 'Outros',
+                                                             '2401 - COPROCESSAMENTO RES PRIVADOS': 'Blendagem para Coprocessamento',
+                                                             'COPROCESSAMENTO RES PRIVADOS': 'Blendagem para Coprocessamento',
+                                                             'TRANSP EFLUENTES PRIVADOS': 'Tratamento de Efluentes',
+                                                             '2302-AT CLASSE I - RES PRIVADOS': 'Aterro Resíduos Classe I',
+                                                             }
+                                        #actions = ActionChains(navegador)
+                                        if tratamento == '2406 - SERVICOS DE LOGISTICA REVERSA':
+                                            # não precisa abrir combo, já salva na planilha
                                             motivo = "Lâmpadas"
                                             clientes_separados.append([ticket, cliente, mtr, peso, data, motivo])
+
+                                        elif tratamento in mapa_tratamentos:
+                                            # Abre o combo
+                                            navegador.find_element(By.XPATH, '//div[@class="mat-select-arrow"]').click()
+                                            time.sleep(0.5)
+
+                                            texto_opcao = mapa_tratamentos[tratamento]
+
+                                            # Pega todos os mat-option renderizados
+                                            opcoes = navegador.find_elements(By.XPATH, '//mat-option')
+
+                                            encontrou = False
+                                            for opcao in opcoes:
+                                                if texto_opcao in opcao.text:
+                                                    try:
+                                                        opcao.click()
+                                                        time.sleep(4)
+                                                    except:
+                                                        navegador.execute_script("arguments[0].click();", opcao)
+                                                        time.sleep(4)
+                                                    encontrou = True
+                                                    break
+
+                                            if not encontrou:
+                                                motivo = "Tratamento não listado na planilha"
+                                                clientes_separados.append([ticket, cliente, mtr, peso, data, motivo])
+                                                print(f"⚠️ Opção '{texto_opcao}' não encontrada!")
+
+                                        else:
+                                            # Caso não esteja no mapa e não seja a exceção
+                                            motivo = "Tratamento não listado na planilha"
+                                            clientes_separados.append([ticket, cliente, mtr, peso, data, motivo])
+                                            print(f"⚠️ Tratamento '{tratamento}' não encontrado no mapeamento!")
 
                                         # Insere o peso correspondente
                                         campo_peso = WebDriverWait(navegador, 10).until(
@@ -535,9 +489,9 @@ def processar_planilha():
                                         is_disabled = button.get_attribute("disabled") is not None
 
                                         if is_disabled:
-                                            # SE CAIU AQUI É PORQUE O BOTÃO NÃO ESTÁ DISPONÍVEL E NÃO PODE SER CLICADO ENTÃO SALVA EM UMA PLANILHA
-
-                                            clientes_separados.append([ticket, cliente, mtr, peso, data])
+                                            # SE CAIU AQUI É PORQUE O BOTÃO DE RECEBER NÃO ESTÁ DISPONÍVEL E NÃO PODE SER CLICADO ENTÃO SALVA EM UMA PLANILHA
+                                            motivo = "Botão de receber indisponível"
+                                            clientes_separados.append([ticket, cliente, mtr, peso, data, motivo])
 
                                             # print("O botão está desativado e não pode ser clicado.")
                                             # CLICA EM CANCELAER ANTES DE COMEÇAR DE NOVO
@@ -547,7 +501,7 @@ def processar_planilha():
 
                                             # SE CAIU AQUI É PORQUE O BOTÃO ESTÁ DISPONÍVEL ENTÃO CLICA EM RECEBER.
                                             navegador.find_element(By.XPATH,
-                                                                   '//button[span[text()="Receber"]]').click()
+                                                                   '//button[span[text()="Cancelar"]]').click()
 
                                         # LIMPAR O CAMPO DA MTR PARA INSERIR A NOVA MTR.
                                         sleep(1)
@@ -580,7 +534,7 @@ def processar_planilha():
     workbook.save('clientes_separados.xlsx')
 
     # CHAMA A FUNÇÃO PARA ENVIAR O E-MAIL
-    enviar_email()
+    #enviar_email()
 
     # Mensagem final quando terminar
     label.config(text="Processo concluído!")
