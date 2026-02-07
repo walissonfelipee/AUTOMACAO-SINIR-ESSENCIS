@@ -40,7 +40,8 @@ navegador = webdriver.Chrome(service=servico)
 # ABRE A PÁGINA DO SINIR.
 navegador.get(SITE)
 sleep(2)
-
+pyautogui.press('esc')
+sleep (2)
 # INSERE AS INFORMÇÕES COMO LOGIN E SENHA DO USUÁRIO.
 navegador.find_element(By.XPATH, '//*[@id="mat-input-0"]').send_keys(CNPJ)
 navegador.find_element(By.XPATH, '//*[@id="mat-input-1"]').send_keys(CPF)
@@ -432,10 +433,10 @@ def processar_planilha():
                                                 if texto_opcao in opcao.text:
                                                     try:
                                                         opcao.click()
-                                                        time.sleep(4)
+                                                        time.sleep(0.5)
                                                     except:
                                                         navegador.execute_script("arguments[0].click();", opcao)
-                                                        time.sleep(4)
+                                                        time.sleep(0.5)
                                                     encontrou = True
                                                     break
 
@@ -463,29 +464,29 @@ def processar_planilha():
                                         else:
                                             campo_peso.send_keys(peso_formatado)
 
-                                            sleep(1)
+                                            sleep(0.5)
 
                                         # CLICAR NO LAPIS DA JUSTIFICATIVA
 
                                         navegador.find_element(By.XPATH,
                                                                '/html/body/app-root/app-navegacao/mat-sidenav-container/mat-sidenav-content/app-meus-mtrs/mat-sidenav-container/mat-sidenav-content/p-dialog[2]/div/div[2]/form/mat-card/p-table/div/div[2]/table/tbody/tr/td[6]/a/i').click()
-                                        sleep(1)
+                                        sleep(0.5)
 
                                         # PREENCHER O TICKET NA JUSTIFICATIVA
 
                                         navegador.find_element(By.XPATH, '//textarea[@id="mat-input-38"]').send_keys(
                                             str(ticket))
-                                        sleep(1)
+                                        sleep(0.5)
 
                                         # CLICAR EM SALVAR O TICKET
 
                                         navegador.find_element(By.XPATH,
                                                                '//button[@label="Salvar"]').click()
-                                        sleep(1)
+                                        sleep(0.5)
 
                                         #  ANTES DE CLICAR EM RECEBER VERIFICA SE O BOTAO DE RECEBER ESTA DISPONIVEL
 
-                                        button = navegador.find_element(By.XPATH, '//button[span[text()="Receber"]]')
+                                        button = navegador.find_element(By.XPATH, '//button[span[text()="Cancelar"]]')
                                         is_disabled = button.get_attribute("disabled") is not None
 
                                         if is_disabled:
@@ -493,7 +494,7 @@ def processar_planilha():
                                             motivo = "Botão de receber indisponível"
                                             clientes_separados.append([ticket, cliente, mtr, peso, data, motivo])
 
-                                            # print("O botão está desativado e não pode ser clicado.")
+
                                             # CLICA EM CANCELAER ANTES DE COMEÇAR DE NOVO
 
                                             navegador.find_element(By.XPATH, '//button[span[text()="Cancelar"]]').click()
@@ -501,16 +502,16 @@ def processar_planilha():
 
                                             # SE CAIU AQUI É PORQUE O BOTÃO ESTÁ DISPONÍVEL ENTÃO CLICA EM RECEBER.
                                             navegador.find_element(By.XPATH,
-                                                                   '//button[span[text()="Cancelar"]]').click()
+                                                                   '//button[span[text()="Receber"]]').click()
 
                                         # LIMPAR O CAMPO DA MTR PARA INSERIR A NOVA MTR.
-                                        sleep(1)
+                                        sleep(0.6)
                                         navegador.find_element(By.XPATH, '//input[@id="mat-input-32"]').click()
-                                        sleep(1)
+                                        sleep(0.6)
                                         pyautogui.hotkey('ctrl', 'a')
-                                        sleep(1)
+                                        sleep(0.6)
                                         pyautogui.hotkey('backspace')
-                                        sleep(1)
+                                        sleep(0.6)
                                     except:
                                         navegador.find_element(By.XPATH,
                                                                '/html/body/app-root/app-navegacao/mat-sidenav-container/mat-sidenav-content/app-meus-mtrs/'
